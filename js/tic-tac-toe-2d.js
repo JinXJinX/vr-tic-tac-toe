@@ -1,6 +1,5 @@
 var SIZE = 3,
-  // EMPTY = '&nbsp;',
-  EMPTY = '',
+  EMPTY = '&nbsp;',
   boxes = [],
   turn = 'X',
   score,
@@ -17,22 +16,12 @@ function check(cell){
   return false
 }
 
-function tictactoe(ele) {
-  if (ele.getAttribute('used')) {
+function tictactoe(element) {
+  if (element.innerHTML !== EMPTY) {
     return;
   }
-  console.log(ele.getAttribute('used'));
-  if (turn === 'X') {
-    // Add to the scene with `appendChild`.
-    // ele.sceneEl.appendChild(newVoxelEl);
-    ele.setAttribute('geometry', 'radius:0.4;primitive:dodecahedron');
-  } else {
-    ele.setAttribute('geometry', 'radius:0.25;radiusTubular:0.02;primitive:torusKnot');
-  }
-  ele.setAttribute('visible', 'true');
-  ele.setAttribute('used', 'true');
   moves += 1;
-  if (check(ele)){
+  if (check(element)){
     alert(turn + ' Win!');
     newGame();
   } else if (moves === 9){
