@@ -3,6 +3,7 @@ var SIZE = 3,
   EMPTY = '',
   boxes = [],
   turn = 'X',
+  user = 'X',
   score,
   moves,
   win,
@@ -16,11 +17,7 @@ function init(){
   lose = document.createElement('a-entity');
   draw = document.createElement('a-entity');
 
-  win.setAttribute('geometry', {
-    primitive: 'dodecahedron',
-    height: 1,
-    width: 1
-  });
+  win.setAttribute('ply-model', 'src: #winer');
   win.setAttribute('dynamic-body', {
     sphereRadius: NaN,
     shape: 'auto',
@@ -29,12 +26,9 @@ function init(){
   });
   win.setAttribute('position', {x: 1, y: 6, z: -4});
   win.setAttribute('class', 'status');
+  win.setAttribute('scale', '0.08 0.08 0.08');
 
-  lose.setAttribute('geometry', {
-    primitive: 'box',
-    height: 3,
-    width: 1
-  });
+  lose.setAttribute('ply-model', 'src: #loser');
   lose.setAttribute('dynamic-body', {
     sphereRadius: NaN,
     shape: 'auto',
@@ -43,12 +37,9 @@ function init(){
   });
   lose.setAttribute('position', {x: 1, y: 6, z: -4});
   lose.setAttribute('class', 'status');
+  lose.setAttribute('scale', '0.08 0.08 0.08');
 
-  draw.setAttribute('geometry', {
-    primitive: 'box',
-    height: 3,
-    width: 1
-  });
+  draw.setAttribute('ply-model', 'src: #gg');
   draw.setAttribute('dynamic-body', {
     sphereRadius: NaN,
     shape: 'auto',
@@ -57,6 +48,7 @@ function init(){
   });
   draw.setAttribute('position', {x: 1, y: 6, z: -4});
   draw.setAttribute('class', 'status');
+  draw.setAttribute('scale', '0.05 0.05 0.05');
 
   newGame();
 }
@@ -73,16 +65,37 @@ function check(cell){
 }
 
 function gamewin(){
+  win.setAttribute('position', {x: 1, y: 6, z: -4});
   sceneEl = document.querySelector('a-scene');
   sceneEl.appendChild(win);
 }
 function gamelose(){
+  lose.setAttribute('position', {x: 1, y: 6, z: -4});
   sceneEl = document.querySelector('a-scene');
   sceneEl.appendChild(lose);
 }
 function gamedraw(){
+  draw.setAttribute('position', {x: 1, y: 6, z: -4});
   sceneEl = document.querySelector('a-scene');
   sceneEl.appendChild(draw);
+}
+
+function selectrole(ele){
+  if (ele.classList.contains('selected')){
+    return;
+  }
+  var tmp = document.querySelector(".selected");
+  tmp.classList.remove("selected");
+  var pointer = document.querySelector("#pointer");
+  if (ele.id == 'o'){
+    pointer.setAttribute('position', {x: -3.226, y: 0.973, z:  -3.755});
+  } else if (ele.id == 'x') {
+    pointer.setAttribute('position', {x: -3.811, y: 0.973, z: -2.662});
+  }
+  ele.classList.add('selected');
+  turn = turn === 'X' ? 'O' : 'X';
+  user = turn;
+  newGame();
 }
 
 function tictactoe(ele) {
@@ -101,7 +114,7 @@ function tictactoe(ele) {
   ele.setAttribute('used', 'true');
   moves += 1;
   if (check(ele)){
-    if (turn === 'X'){
+    if (turn == user){
       gamewin();
     } else {
       gamelose();
@@ -109,6 +122,7 @@ function tictactoe(ele) {
     cont = 'false';
   } else if (moves === 9){
     gamedraw();
+    cont = 'false';
   } else {
     // switch
     turn = turn === 'X' ? 'O' : 'X';
