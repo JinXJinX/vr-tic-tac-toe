@@ -4,7 +4,62 @@ var SIZE = 3,
   boxes = [],
   turn = 'X',
   score,
-  moves;
+  moves,
+  win,
+  lose,
+  draw,
+  sceneEl,
+  cont;
+
+function init(){
+  win = document.createElement('a-entity');
+  lose = document.createElement('a-entity');
+  draw = document.createElement('a-entity');
+
+  win.setAttribute('geometry', {
+    primitive: 'dodecahedron',
+    height: 1,
+    width: 1
+  });
+  win.setAttribute('dynamic-body', {
+    sphereRadius: NaN,
+    shape: 'auto',
+    cylinderAxis: 'y',
+    mass: 5.00
+  });
+  win.setAttribute('position', {x: 1, y: 6, z: -4});
+  win.setAttribute('class', 'status');
+
+  lose.setAttribute('geometry', {
+    primitive: 'box',
+    height: 3,
+    width: 1
+  });
+  lose.setAttribute('dynamic-body', {
+    sphereRadius: NaN,
+    shape: 'auto',
+    cylinderAxis: 'y',
+    mass: 5.00
+  });
+  lose.setAttribute('position', {x: 1, y: 6, z: -4});
+  lose.setAttribute('class', 'status');
+
+  draw.setAttribute('geometry', {
+    primitive: 'box',
+    height: 3,
+    width: 1
+  });
+  draw.setAttribute('dynamic-body', {
+    sphereRadius: NaN,
+    shape: 'auto',
+    cylinderAxis: 'y',
+    mass: 5.00
+  });
+  draw.setAttribute('position', {x: 1, y: 6, z: -4});
+  draw.setAttribute('class', 'status');
+
+  newGame();
+}
 
 function check(cell){
   var memberOf = cell.id.split(/\s+/);
@@ -17,11 +72,24 @@ function check(cell){
   return false
 }
 
+function gamewin(){
+  sceneEl = document.querySelector('a-scene');
+  sceneEl.appendChild(win);
+}
+function gamelose(){
+  sceneEl = document.querySelector('a-scene');
+  sceneEl.appendChild(lose);
+}
+function gamedraw(){
+  sceneEl = document.querySelector('a-scene');
+  sceneEl.appendChild(draw);
+}
+
 function tictactoe(ele) {
-  if (ele.getAttribute('used')) {
+  if (cont !== 'true' || ele.getAttribute('used') === 'true') {
     return;
   }
-  console.log(ele.getAttribute('used'));
+  // console.log(ele.getAttribute('used'));
   if (turn === 'X') {
     // Add to the scene with `appendChild`.
     // ele.sceneEl.appendChild(newVoxelEl);
@@ -33,11 +101,14 @@ function tictactoe(ele) {
   ele.setAttribute('used', 'true');
   moves += 1;
   if (check(ele)){
-    alert(turn + ' Win!');
-    newGame();
+    if (turn === 'X'){
+      gamewin();
+    } else {
+      gamelose();
+    }
+    cont = 'false';
   } else if (moves === 9){
-    alert('Draw');
-    newGame();
+    gamedraw();
   } else {
     // switch
     turn = turn === 'X' ? 'O' : 'X';
@@ -67,10 +138,17 @@ function newGame(){
       'diagonal1': 0,
     },
   };
+  cont = 'true';
   moves = 0;
   turn = 'X';
-  var cells = document.getElementsByClassName("cell");
-  [].forEach.call(cells, function (cell) { cell.innerHTML = EMPTY; })
+  var cells = document.querySelectorAll(".cell");
+  [].forEach.call(cells, function (cell) {
+                cell.setAttribute('geometry', '');
+                cell.setAttribute('used', 'false');
+                cell.setAttribute('visible', 'false');
+              })
+  var eles = document.querySelectorAll(".status");
+  [].forEach.call(eles, function (ele) { ele.parentNode.removeChild(ele); })
 }
 
-newGame();
+init();

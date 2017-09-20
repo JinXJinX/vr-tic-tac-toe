@@ -5,9 +5,9 @@
     <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-teleport-controls@0.2.0/dist/aframe-teleport-controls.min.js"></script>
     <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.2/dist/aframe-controller-cursor-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.0.0/dist/aframe-physics-system.min.js"></script>
     <script src="js/intersection-spawn.js"></script>
     <script src="js/random-color.js"></script>
-    <script src="js/snap.js"></script>
 		<script src="js/tic-tac-toe.js"></script>
 	</head>
 
@@ -39,18 +39,20 @@
 
             <a-entity position="0.057 0.63 -2.863"></a-entity>
             <a-entity position="-0.22 0.32 -5"></a-entity>
-            <a-entity position="-1.45 2.45 -6" geometry="" id="col0 row0 diagonal0" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="-0.35 2.45 -6" geometry="" id="col1 row0" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="0.75 2.45 -6" geometry="" id="col2 row0 diagonal1" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="-1.45 1.35 -6" geometry="" id="col0 row1" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="-0.35 1.35 -6" geometry="" id="col1 row1 diagonal0 diagonal1" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="0.75 1.35 -6" geometry="" id="col2 row1" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="-1.45 0.25 -6" geometry="" id="col0 row2 diagonal1" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="-0.35 0.25 -6" geometry="" id="col1 row2" visible="false" onclick="tictactoe(this)"></a-entity>
-            <a-entity position="0.75 0.25 -6" geometry="" id="col2 row2 diagonal0" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="-1.45 2.45 -6" geometry="" class="cell" id="col0 row0 diagonal0" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="-0.35 2.45 -6" geometry="" class="cell" id="col1 row0" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="0.75 2.45 -6" geometry="" class="cell" id="col2 row0 diagonal1" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="-1.45 1.35 -6" geometry="" class="cell" id="col0 row1" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="-0.35 1.35 -6" geometry="" class="cell" id="col1 row1 diagonal0 diagonal1" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="0.75 1.35 -6" geometry="" class="cell" id="col2 row1" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="-1.45 0.25 -6" geometry="" class="cell" id="col0 row2 diagonal1" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="-0.35 0.25 -6" geometry="" class="cell" id="col1 row2" visible="false" onclick="tictactoe(this)"></a-entity>
+            <a-entity position="0.75 0.25 -6" geometry="" class="cell" id="col2 row2 diagonal0" visible="false" onclick="tictactoe(this)"></a-entity>
 
       <a-entity position="-3.375 0.412 -3.755" id="o" geometry="radius:0.4;primitive:dodecahedron"></a-entity>
       <a-entity position="-4.242 0.381 -2.748" id="x" geometry="radius:0.25;radiusTubular:0.02;primitive:torusKnot"></a-entity>
+      <a-entity position="-4.263 1.504 -3.828" rotation="0 45 0" geometry="width:2.4;height:0.5;primitive:plane" text="value:New Game;width:10;height:10;align:center" onclick="newGame()"></a-entity>
+      <a-entity id="ground" geometry="primitive:plane;width:100;height:100" rotation="-90 0 0" material="src:#grid;repeat:10000 10000;transparent:true;metalness:0.6;roughness:0.4;sphericalEnvMap:#sky" position="0 0 0" scale="1 1 1" visible="false" static-body="shape:auto;cylinderAxis:y;sphereRadius:NaN"></a-entity>
     </a-scene>
 
 
