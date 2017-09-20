@@ -12,6 +12,8 @@ var SIZE = 3,
   sceneEl,
   cont;
 
+const shuffleArray = (arr) => arr.sort(() => (Math.random() - 0.5))
+
 function init(){
   win = document.createElement('a-entity');
   lose = document.createElement('a-entity');
@@ -98,8 +100,8 @@ function selectrole(ele){
   newGame();
 }
 
-function tictactoe(ele) {
-  if (cont !== 'true' || ele.getAttribute('used') === 'true') {
+function tictactoe(ele, botturn=false) {
+  if (cont !== 'true' || ele.getAttribute('used') === 'true' || (user != turn && !botturn)) {
     return;
   }
   // console.log(ele.getAttribute('used'));
@@ -127,7 +129,23 @@ function tictactoe(ele) {
     // switch
     turn = turn === 'X' ? 'O' : 'X';
   }
+  if (turn != user){
+    setTimeout(bot, 1500);
+  }
 }
+function bot(){
+  var cells = document.querySelectorAll(".cell");
+  var i;
+  var arr = shuffleArray([0,1,2,3,4,5,6,7,8]);
+  for (i = 0; i < cells.length; i++) {
+      if (cells[arr[i]].getAttribute('visible') == false) {
+        tictactoe(cells[arr[i]], true);
+        break;
+      }
+  }
+}
+
+
 
 function newGame(){
   score = {
