@@ -1,7 +1,4 @@
-var SIZE = 3,
-  // EMPTY = '&nbsp;',
-  EMPTY = '',
-  boxes = [],
+var boxes = [],
   turn = 'X',
   user = 'X',
   score,
@@ -73,7 +70,7 @@ function check(cell){
   var memberOf = cell.id.split(/\s+/);
   for (var i = 0; i < memberOf.length; i++) {
     score[turn][memberOf[i]] += 1;
-    if (score[turn][memberOf[i]] == SIZE) {
+    if (score[turn][memberOf[i]] == 3) {
       return true;
     }
   }
@@ -127,7 +124,7 @@ function tictactoe(ele, botturn=false) {
   } else {
     ele.setAttribute('ply-model', 'src: #o-model');
   }
-  ele.setAttribute('rotation', '270 0 0');
+  ele.setAttribute('rotation', '0 0 0');
   ele.setAttribute('scale', '0.02 0.02 0.02');
   ele.setAttribute('visible', 'true');
   ele.setAttribute('used', 'true');
@@ -195,9 +192,9 @@ function newGame(){
                 cell.setAttribute('geometry', '');
                 cell.setAttribute('used', 'false');
                 cell.setAttribute('visible', 'false');
-                cell.removeAttribute('ply-model');
-                cell.removeAttribute('rotation');
-                cell.removeAttribute('scale');
+                // cell.removeAttribute('ply-model');
+                // cell.removeAttribute('rotation');
+                // cell.removeAttribute('scale');
               })
   var eles = document.querySelectorAll(".status");
   [].forEach.call(eles, function (ele) { ele.parentNode.removeChild(ele); })
