@@ -181,6 +181,9 @@ function newGame(){
               })
   var eles = document.querySelectorAll(".status");
   [].forEach.call(eles, function (ele) { ele.parentNode.removeChild(ele); })
+  if (user != 'X'){
+    bot();
+  }
 }
 
 init();
