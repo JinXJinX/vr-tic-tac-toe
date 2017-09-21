@@ -143,7 +143,7 @@ function tictactoe(ele, botturn=false) {
     turn = turn === 'X' ? 'O' : 'X';
   }
   if (turn != user){
-    setTimeout(bot, 1500);
+    setTimeout(bot, Math.floor(Math.random() * 1000) + 300);
   }
 }
 function bot(){
