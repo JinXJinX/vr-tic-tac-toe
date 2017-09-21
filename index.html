@@ -19,6 +19,8 @@
               <a-asset-item id="winer" src="https://cdn.rawgit.com/JinXJinX/vr-tic-tac-toe/master/model/win.ply"></a-asset-item>
               <a-asset-item id="loser" src="https://cdn.rawgit.com/JinXJinX/vr-tic-tac-toe/master/model/lose.ply"></a-asset-item>
               <a-asset-item id="gg" src="https://cdn.rawgit.com/JinXJinX/vr-tic-tac-toe/master/model/draw.ply"></a-asset-item>
+              <a-asset-item id="x_model" src="https://cdn.rawgit.com/JinXJinX/vr-tic-tac-toe/master/model/x.ply"></a-asset-item>
+              <a-asset-item id="o_model" src="https://cdn.rawgit.com/JinXJinX/vr-tic-tac-toe/master/model/o.ply"></a-asset-item>
             </a-assets>
 
             <a-box color="tomato" depth="2" height="4" width="0.5" position="1.3 1.35 -6" material="" geometry="depth:1;height:3.4;width:0.1"></a-box>
@@ -52,7 +54,7 @@
             <a-entity position="-0.35 0.25 -6" geometry="" class="cell" id="col1 row2" visible="false" onclick="tictactoe(this)"></a-entity>
             <a-entity position="0.75 0.25 -6" geometry="" class="cell" id="col2 row2 diagonal0" visible="false" onclick="tictactoe(this)"></a-entity>
 
-      <a-entity position="-3.375 0.412 -3.755" id="o" onclick="selectrole(this)" class="selected" geometry="primitive:dodecahedron;radius:0.4"></a-entity>
+      <a-entity position="-3.375 0.412 -3.755" id="o" onclick="selectrole(this)" class="selected" ply-model="src: #o_model"></a-entity>
       <a-entity position="-3.811 0.381 -2.662" id="x" onclick="selectrole(this)" class="tag" geometry="primitive:torusKnot;radius:0.25;radiusTubular:0.02"></a-entity>
 
       <a-entity position="-4.136 1.504 -3.391" rotation="0 65 0" geometry="primitive:plane;height:0.5;width:2.4" text="align:center;height:10;value:New Game;width:10" onclick="newGame()"></a-entity>
