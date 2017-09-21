@@ -10,7 +10,9 @@ var SIZE = 3,
   lose,
   draw,
   sceneEl,
-  cont;
+  cont,
+  xs,
+  os;
 
 const shuffleArray = (arr) => arr.sort(() => (Math.random() - 0.5))
 
@@ -18,6 +20,8 @@ function init(){
   win = document.createElement('a-entity');
   lose = document.createElement('a-entity');
   draw = document.createElement('a-entity');
+  xs = document.createElement('a-entity');
+  os = document.createElement('a-entity');
 
   win.setAttribute('ply-model', 'src: #winer');
   win.setAttribute('dynamic-body', {
@@ -51,6 +55,16 @@ function init(){
   draw.setAttribute('position', {x: 1, y: 6, z: -4});
   draw.setAttribute('class', 'status');
   draw.setAttribute('scale', '0.05 0.05 0.05');
+
+  // var tmp = document.querySelector("#x-tag");
+  // tmp.setAttribute('ply-model', 'src: #x-model');
+  // tmp = document.querySelector("#o-tag");
+  // tmp.setAttribute('ply-model', 'src: #o-model');
+  // var tmp = document.querySelector("#o-tag");
+  // tmp.addEventListener('click', selectrole(tmp));
+  // tmp = document.querySelector("#x-tag");
+  // tmp.addEventListener('click', selectrole(tmp));
+
 
   newGame();
 }
@@ -89,14 +103,15 @@ function selectrole(ele){
   var tmp = document.querySelector(".selected");
   tmp.classList.remove("selected");
   var pointer = document.querySelector("#pointer");
-  if (ele.id == 'o'){
-    pointer.setAttribute('position', {x: -3.226, y: 0.973, z:  -3.755});
-  } else if (ele.id == 'x') {
-    pointer.setAttribute('position', {x: -3.811, y: 0.973, z: -2.662});
+  if (ele.id == 'p1'){
+    pointer.setAttribute('position', {x: -3.679, y: 0.973, z:  -4.131});
+  } else if (ele.id == 'p2') {
+    pointer.setAttribute('position', {x: -3.679, y: 0.45, z: -4.131});
   }
   ele.classList.add('selected');
   turn = turn === 'X' ? 'O' : 'X';
   user = turn;
+  console.log('curr user: ' + user);
   newGame();
 }
 
@@ -108,10 +123,12 @@ function tictactoe(ele, botturn=false) {
   if (turn === 'X') {
     // Add to the scene with `appendChild`.
     // ele.sceneEl.appendChild(newVoxelEl);
-    ele.setAttribute('geometry', 'radius:0.4;primitive:dodecahedron');
+    ele.setAttribute('ply-model', 'src: #x-model');
   } else {
-    ele.setAttribute('geometry', 'radius:0.25;radiusTubular:0.02;primitive:torusKnot');
+    ele.setAttribute('ply-model', 'src: #o-model');
   }
+  ele.setAttribute('rotation', '270 0 0');
+  ele.setAttribute('scale', '0.02 0.02 0.02');
   ele.setAttribute('visible', 'true');
   ele.setAttribute('used', 'true');
   moves += 1;
@@ -178,6 +195,9 @@ function newGame(){
                 cell.setAttribute('geometry', '');
                 cell.setAttribute('used', 'false');
                 cell.setAttribute('visible', 'false');
+                cell.removeAttribute('ply-model');
+                cell.removeAttribute('rotation');
+                cell.removeAttribute('scale');
               })
   var eles = document.querySelectorAll(".status");
   [].forEach.call(eles, function (ele) { ele.parentNode.removeChild(ele); })
