@@ -124,7 +124,6 @@ function tictactoe(ele, botturn=false) {
   } else {
     ele.setAttribute('ply-model', 'src: #o-model');
   }
-  ele.setAttribute('rotation', '0 0 0');
   ele.setAttribute('scale', '0.02 0.02 0.02');
   ele.setAttribute('visible', 'true');
   ele.setAttribute('used', 'true');
