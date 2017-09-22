@@ -1,11 +1,14 @@
 <h1 align="center"> VR Tic Tac Toe </h1>
 <p align="center"><b>A VR game built by A-Frame</b></p>
 
-<p  align="center">
-[![Travis branch](https://img.shields.io/travis/rust-lang/rust/master.svg)]()
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+<p align="center"><a href="https://jinxjinx.github.io/vr-tic-tac-toe" target="_blank"><img width="480" alt="A-Frame" src="img/ttt1.png"></a></p>
+
+
+<p align="center">
+  <img src="https://img.shields.io/travis/aframevr/aframe.svg?style=flat-square" alt="Build Status">   
+
+  <img src="https://img.shields.io/npm/l/aframe.svg?style=flat-square" alt="License">
 </p>
-![alt text](img/ttt1.png)
 
 ---
 
