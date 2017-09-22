@@ -10,11 +10,8 @@
   <img src="https://img.shields.io/npm/l/aframe.svg?style=flat-square" alt="License">
 </p>
 
----
-
 ## Try It
 #### :point_right::point_right::point_right: [jinxjinx.github.io/vr-tic-tac-toe](https://jinxjinx.github.io/vr-tic-tac-toe)
----
 
 ## Screenshots
 
